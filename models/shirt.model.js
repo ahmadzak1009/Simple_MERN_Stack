@@ -6,9 +6,10 @@ const shirtSchema = new Schema(
   {
     name: { type: String, required: true },
     price: { type: Number, required: true },
-    color: Array,
-    size: Array,
-    img: { type: String, default: "default.jpg" }
+    colors: Array,
+    sizes: Array,
+    img: { type: String, default: "default.jpg" },
+    stock: Number
   },
   {
     timestamps: true

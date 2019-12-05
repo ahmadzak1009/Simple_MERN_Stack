@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
@@ -11,7 +10,13 @@ const userSchema = new Schema(
       unique: true,
       minLength: 4
     },
-    cart: [{ type: Schema.Types.ObjectId, ref: "Shirt" }]
+    cart: [
+      {
+        item: { type: Schema.Types.ObjectId, ref: "Shirt" },
+        count: Number,
+        price: Number
+      }
+    ]
   },
   {
     timestamps: true

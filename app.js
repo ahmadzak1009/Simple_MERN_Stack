@@ -14,14 +14,21 @@ app.use(express.json());
 // Connect to MongoDB
 mongoose.connect(
   process.env.MONGODB_URI,
-  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  },
   () => console.log("Connected to MongoDB")
 );
 
 // Router
 const usersRouter = require("./routes/users");
+const shirtsRouter = require("./routes/shirts");
 
 app.use("/users", usersRouter);
+app.use("/shirt", shirtsRouter);
 
 app.listen(port, () => {
   console.log(`Listening on Port ${port}`);
