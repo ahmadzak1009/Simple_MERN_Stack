@@ -10,7 +10,8 @@ const userSchema = new Schema(
       trim: true,
       unique: true,
       minLength: 4
-    }
+    },
+    cart: [{ type: Schema.Types.ObjectId, ref: "Shirt" }]
   },
   {
     timestamps: true
