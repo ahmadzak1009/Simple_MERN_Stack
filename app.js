@@ -28,7 +28,7 @@ const usersRouter = require("./routes/users");
 const shirtsRouter = require("./routes/shirts");
 
 app.use("/users", usersRouter);
-app.use("/shirt", shirtsRouter);
+app.use("/shirts", shirtsRouter);
 
 app.listen(port, () => {
   console.log(`Listening on Port ${port}`);
