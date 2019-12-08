@@ -60,7 +60,10 @@ const Navbar = props => {
                     Items
                   </Link>
                   <div className="dropdown-menu">
-                    <Link className="dropdown-item" to="/admin/item-add">
+                    <Link className="dropdown-item" to="/admin/shirts">
+                      All Items
+                    </Link>
+                    <Link className="dropdown-item" to="/admin/shirt/add">
                       Add Item
                     </Link>
                   </div>

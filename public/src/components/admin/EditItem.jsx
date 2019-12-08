@@ -1,14 +1,28 @@
-import React, { useState, useContext } from "react";
-import axios from "axios";
+import React, { useContext, useState, useEffect } from "react";
 import { ShirtContext } from "../../ShirtContext";
 
-const AddItem = props => {
-  const { shirts, setShirts } = useContext(ShirtContext);
+const EditItem = props => {
+  const { shirts, updateShirt } = useContext(ShirtContext);
+
+  const idItem = props.match.params.id;
+  const theItem = shirts.filter(shirt => shirt._id === idItem);
+
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [sizes, setSizes] = useState("");
   const [colors, setColors] = useState("");
   const [stock, setStock] = useState("");
+
+  useEffect(() => {
+    if (theItem.length !== 0) {
+      const { name, price, sizes, colors, stock } = theItem[0];
+      setName(name);
+      setPrice(price);
+      setSizes(sizes);
+      setColors(colors);
+      setStock(stock);
+    }
+  }, [shirts]);
 
   const inputToArr = val => {
     let arr = val.split(",");
@@ -17,37 +31,19 @@ const AddItem = props => {
     return trimArr;
   };
 
-  const submitItem = e => {
+  const onSubmit = e => {
     e.preventDefault();
 
-    const newItem = {
-      name,
-      price,
-      sizes,
-      colors,
-      stock
-    };
+    const editedItem = { name, price, sizes, colors, stock };
 
-    axios
-      .post("/shirts/add", newItem)
-      .then(res => res.data)
-      .then(data => setShirts([data, ...shirts]))
-      .catch(err => console.log(err));
-
-    setName("");
-    setPrice("");
-    setSizes("");
-    setColors("");
-    setStock("");
-
-    props.history.push("/admin/shirts");
+    updateShirt(idItem, editedItem);
   };
 
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-5 mx-auto">
-          <form onSubmit={submitItem}>
+          <form onSubmit={onSubmit}>
             <h2 className="py-3 text-center">Form Add Item</h2>
             <div className="form-group">
               <input
@@ -127,4 +123,4 @@ const AddItem = props => {
   );
 };
 
-export default AddItem;
+export default EditItem;

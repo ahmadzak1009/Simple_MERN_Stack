@@ -4,6 +4,7 @@ let Shirt = require("../models/shirt.model");
 // GET ALL SHIRT
 router.get("/", (req, res) => {
   Shirt.find()
+    .sort("-createdAt")
     .then(shirts => res.json(shirts))
     .catch(error => res.status(400).json({ msg: error }));
 });
@@ -39,10 +40,10 @@ router.patch("/:id", (req, res) => {
     price: Number(req.body.price),
     colors: req.body.colors,
     sizes: req.body.sizes,
-    img: req.body.img,
+    img: req.body.img || "default.jpg",
     stock: Number(req.body.stock)
   })
-    .then(() => res.json("Shirt Updated"))
+    .then(shirt => res.json(shirt))
     .catch(error => res.status(400).json({ msg: error }));
 });
 
