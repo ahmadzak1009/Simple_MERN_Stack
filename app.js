@@ -26,9 +26,11 @@ mongoose.connect(
 // Router
 const usersRouter = require("./routes/users");
 const shirtsRouter = require("./routes/shirts");
+const adminsRouter = require("./routes/admins");
 
 app.use("/users", usersRouter);
 app.use("/shirts", shirtsRouter);
+app.use("/admins", adminsRouter);
 
 app.listen(port, () => {
   console.log(`Listening on Port ${port}`);
