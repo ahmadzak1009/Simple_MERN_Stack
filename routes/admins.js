@@ -44,17 +44,17 @@ router.post("/login", (req, res) => {
       if (user.length !== 0) {
         bcrypt.compare(req.body.password, user.password).then(match => {
           if (match) {
-            const token = jwt.sign({ _id: user._id }, process.env.PRIVATE_KEY);
-            res.header("auth-token", token).send(token);
+            const token = jwt.sign({ _id: user._id }, process.env.PRIVATE_KEY, { expiresIn: "1h" });
+            res.header("auth-token", token).json({ token, id: user._id });
           } else {
-            res.send("password is wrong");
+            res.status(400).send("password is wrong");
           }
         });
       } else {
-        res.send("username tidak ditemukan");
+        res.status(400).send("username tidak ditemukan");
       }
     })
-    .catch(() => res.send("username tidak ditemukan"));
+    .catch(() => res.status(400).send("username tidak ditemukan"));
 });
 
 module.exports = router;
