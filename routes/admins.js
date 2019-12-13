@@ -47,7 +47,7 @@ router.post("/login", (req, res) => {
             const token = jwt.sign({ _id: user._id }, process.env.PRIVATE_KEY, { expiresIn: "1h" });
             res.header("auth-token", token).json({ token, id: user._id });
           } else {
-            res.status(400).send("password is wrong");
+            res.status(400).json({ msg: "Incorrect Password" });
           }
         });
       } else {

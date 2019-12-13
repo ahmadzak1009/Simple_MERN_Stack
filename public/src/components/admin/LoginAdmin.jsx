@@ -20,7 +20,7 @@ const LoginAdmin = props => {
         localStorage.setItem("id-admin", res.data.id);
       })
       .then(() => props.history.push("/admin"))
-      .catch(err => console.log(err));
+      .catch(err => window.alert(err));
   };
 
   return (
@@ -28,7 +28,7 @@ const LoginAdmin = props => {
       <div className="container">
         <div className="row">
           <div className="col-md-4 mx-auto">
-            <h2>Login Admin</h2>
+            <h2 className="text-center py-3">Login Admin</h2>
             <form onSubmit={onSubmit}>
               <div className="form-group">
                 <label>Username</label>

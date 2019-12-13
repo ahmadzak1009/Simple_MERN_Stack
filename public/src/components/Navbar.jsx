@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, withRouter } from "react-router-dom";
 
 const Navbar = props => {
   const [adminPage, setAdminPage] = useState(false);
@@ -22,6 +22,7 @@ const Navbar = props => {
 
     const elAdmin = document.querySelector("#admin");
     const elAdminItem = document.querySelector("#admin-item");
+    const elLogoutButton = document.querySelector("#admin-logout");
     // Switch the active menu
     switch (pathname) {
       case "/admin":
@@ -31,9 +32,19 @@ const Navbar = props => {
       case "/admin/shirt/add":
         if (elAdminItem) return elAdminItem.classList.add("active");
         break;
+      case "/admin/login":
+        if (elLogoutButton) return elLogoutButton.classList.add("d-none");
+        break;
       default:
     }
   }, [pathname]);
+
+  const logoutAdmin = e => {
+    localStorage.removeItem("auth-token");
+    localStorage.removeItem("id-admin");
+
+    window.location.pathname = "/admin-login";
+  };
 
   return (
     <>
@@ -86,7 +97,7 @@ const Navbar = props => {
               ) : (
                 <>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/admin">
+                    <Link className="nav-link" to="/">
                       Home
                     </Link>
                   </li>
@@ -94,10 +105,19 @@ const Navbar = props => {
               )}
             </ul>
           </div>
+          {adminPage ? (
+            <button className="btn btn-danger" id="admin-logout" onClick={logoutAdmin}>
+              Logout
+            </button>
+          ) : (
+            <Link to="/admin" className="btn btn-warning">
+              Admin
+            </Link>
+          )}
         </div>
       </nav>
     </>
   );
 };
 
-export default Navbar;
+export default withRouter(Navbar);
