@@ -17,4 +17,26 @@ const addAdminValidation = data => {
   return schema.validate(data);
 };
 
+const registerValidation = data => {
+  const schema = Joi.object({
+    name: Joi.string()
+      .min(4)
+      .required(),
+    username: Joi.string()
+      .required()
+      .trim()
+      .min(4),
+    email: Joi.string()
+      .email()
+      .required()
+      .trim(),
+    password: Joi.string()
+      .required()
+      .trim()
+      .min(4)
+  });
+  return schema.validate(data);
+};
+
 module.exports.addAdminValidation = addAdminValidation;
+module.exports.registerValidation = registerValidation;
