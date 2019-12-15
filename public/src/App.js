@@ -10,6 +10,8 @@ import AllItems from "./components/admin/AllItems";
 import EditItem from "./components/admin/EditItem";
 import ShirtDetails from "./components/shirt/ShirtDetails";
 import LoginAdmin from "./components/admin/LoginAdmin";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
 
 const App = props => {
   return (
@@ -19,6 +21,9 @@ const App = props => {
         {/* CLIENT */}
         <Route path="/" exact component={Home} />
         <Route path="/shirt/:id" exact component={ShirtDetails} />
+
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
 
         {/* ADMIN */}
         <Route path="/admin/login" component={LoginAdmin} />

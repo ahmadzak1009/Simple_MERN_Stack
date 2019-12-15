@@ -22,6 +22,7 @@ const EditItem = props => {
       setColors(colors);
       setStock(stock);
     }
+    // eslint-disable-next-line
   }, [shirts]);
 
   const inputToArr = val => {
